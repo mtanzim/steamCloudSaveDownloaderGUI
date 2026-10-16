@@ -42,14 +42,34 @@ This program automatically crawls the [Steam cloud webpages](https://store.steam
 - Intuitive interface
 - More to come...
 
-## How to build
+## How to run from source
+```sh
+git submodule update --init --recursive
+uv sync
 ```
-pip install -r requirements-dev.txt
-pre-commit install
-git submodule init
-git submodule update
+
+Generate the translation resources before starting the application:
+
+```sh
+# macOS
+./scripts/build/macos/translation/run.sh
+
+# Windows (PowerShell)
 .\scripts\build\windows\translation\run.ps1
-python3 scsd-gui
+
+uv run scsd-gui
+```
+
+To install development tools and set up the pre-commit hook:
+
+```sh
+# macOS/Linux
+uv pip install --python .venv/bin/python -r requirements-dev.txt
+
+# Windows (PowerShell)
+uv pip install --python .venv\Scripts\python.exe -r requirements-dev.txt
+
+uv run pre-commit install
 ```
 
 ## Translations
@@ -60,7 +80,7 @@ python3 scsd-gui
 This project is using format based on Qt Linguist `.ts` file. Translation also available on [Weblate](https://hosted.weblate.org/engage/scsd-gui/).
 
 
-Run `.\scripts\build\windows\translation\run.ps1` to re-generate translation files on local build.
+Run the platform-appropriate translation script above to regenerate the `.qm` and Qt resource files for a local build.
 
 ## Special Thanks
 - Alpha Test: Kadachy@@@, maer
